@@ -118,6 +118,7 @@ void new_setenv(vars_t *vars)
  *
  * Return: void
  */
+
 void new_unsetenv(vars_t *vars)
 {
 	char **key, **newenv;
