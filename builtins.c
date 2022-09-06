@@ -63,6 +63,7 @@ void new_exit(vars_t *vars)
  * @vars: struct of variables
  * Return: void.
  */
+
 void _env(vars_t *vars)
 {
 	unsigned int i;
