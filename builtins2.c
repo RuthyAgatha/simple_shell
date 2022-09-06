@@ -6,6 +6,7 @@
  *
  * Return: void
  */
+
 void add_key(vars_t *vars)
 {
 	unsigned int i;
