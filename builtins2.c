@@ -70,6 +70,7 @@ char **find_key(char **env, char *key)
  *
  * Return: pointer to the new string;
  */
+
 char *add_value(char *key, char *value)
 {
 	unsigned int len1, len2, i, j;
