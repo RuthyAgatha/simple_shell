@@ -38,6 +38,7 @@ void add_key(vars_t *vars)
 	free(vars->env);
 	vars->env = newenv;
 }
+
 /**
  * find_key - finds an environment variable
  * @env: array of environment variables
