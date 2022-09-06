@@ -46,6 +46,7 @@ void add_key(vars_t *vars)
  *
  * Return: pointer to address of the environment variable
  */
+
 char **find_key(char **env, char *key)
 {
 	unsigned int i, j, len;
