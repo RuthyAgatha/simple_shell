@@ -25,6 +25,7 @@ char **make_env(char **env)
 	newenv[i] = NULL;
 	return (newenv);
 }
+
 /**
  * free_env - free the shell's environment
  * @env: shell's environment
