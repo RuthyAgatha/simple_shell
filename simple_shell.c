@@ -1,82 +1,68 @@
-#ifndef _SHELL_H_
-#define _SHELL_H_
+#include "shell.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/wait.h>
-#include <limits.h>
-#include <signal.h>
+/* global variable for ^C handling */
+unsigned int sig_flag;
 
 /**
- * struct variables - variables
- * @av: command line arguments
- * @buffer: buffer of command
- * @env: environment variables
- * @count: count of commands entered
- * @argv: arguments at opening of shell
- * @status: exit status
- * @commands: commands to execute
+ * sig_handler - handles ^C signal interupt
+ * @uuv: unused variable (required for signal function prototype)
+ *
+ * Return: void
  */
-
-typedef struct variables
+static void sig_handler(int uuv)
 {
-	char **av;
-	char *buffer;
-	char **env;
-	size_t count;
-	char **argv;
-	int status;
-	char **commands;
-} vars_t;
+	(void) uuv;
+	if (sig_flag == 0)
+		_puts("\n$ ");
+	else
+		_puts("\n");
+}
 
 /**
- * struct builtins - struct for the builtin functions
- * @name: name of builtin command
- * @f: function for corresponding builtin
+ * main - main function for the shell
+ * @argc: number of arguments passed to main
+ * @argv: array of arguments passed to main
+ * @environment: array of environment variables
+ *
+ * Return: 0 or exit status, or ?
  */
-
-typedef struct builtins
+int main(int argc __attribute__((unused)), char **argv, char **environment)
 {
-	char *name;
-	void (*f)(vars_t *);
-} builtins_t;
+	size_t len_buffer = 0;
+	unsigned int is_pipe = 0, i;
+	vars_t vars = {NULL, NULL, NULL, 0, NULL, 0, NULL};
 
-char **make_env(char **env);
-void free_env(char **env);
-
-ssize_t _puts(char *str);
-char *_strdup(char *strtodup);
-int _strcmpr(char *strcmp1, char *strcmp2);
-char *_strcat(char *strc1, char *strc2);
-unsigned int _strlen(char *str);
-
-char **tokenize(char *buffer, char *delimiter);
-char **_realloc(char **ptr, size_t *size);
-char *new_strtok(char *str, const char *delim);
-
-void (*check_for_builtins(vars_t *vars))(vars_t *vars);
-void new_exit(vars_t *vars);
-void _env(vars_t *vars);
-void new_setenv(vars_t *vars);
-void new_unsetenv(vars_t *vars);
-
-void add_key(vars_t *vars);
-char **find_key(char **env, char *key);
-char *add_value(char *key, char *value);
-int _atoi(char *str);
-
-void check_for_path(vars_t *vars);
-int path_execute(char *command, vars_t *vars);
-char *find_path(char **env);
-int execute_cwd(vars_t *vars);
-int check_for_dir(char *str);
-
-void print_error(vars_t *vars, char *msg);
-void _puts2(char *str);
-char *_uitoa(unsigned int count);
-
-#endif /* _SHELL_H_ */
+	vars.argv = argv;
+	vars.env = make_env(environment);
+	signal(SIGINT, sig_handler);
+	if (!isatty(STDIN_FILENO))
+		is_pipe = 1;
+	if (is_pipe == 0)
+		_puts("$ ");
+	sig_flag = 0;
+	while (getline(&(vars.buffer), &len_buffer, stdin) != -1)
+	{
+		sig_flag = 1;
+		vars.count++;
+		vars.commands = tokenize(vars.buffer, ";");
+		for (i = 0; vars.commands && vars.commands[i] != NULL; i++)
+		{
+			vars.av = tokenize(vars.commands[i], "\n \t\r");
+			if (vars.av && vars.av[0])
+				if (check_for_builtins(&vars) == NULL)
+					check_for_path(&vars);
+		free(vars.av);
+		}
+		free(vars.buffer);
+		free(vars.commands);
+		sig_flag = 0;
+		if (is_pipe == 0)
+			_puts("$ ");
+		vars.buffer = NULL;
+	}
+	if (is_pipe == 0)
+		_puts("\n");
+	free_env(vars.env);
+	free(vars.buffer);
+	exit(vars.status);
+}
