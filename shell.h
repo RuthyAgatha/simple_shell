@@ -31,6 +31,7 @@ typedef struct variables
 	int status;
 	char **commands;
 } vars_t;
+
 /**
  * struct builtins - struct for the builtin functions
  * @name: name of builtin command
