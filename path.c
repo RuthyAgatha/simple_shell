@@ -7,6 +7,7 @@
  *
  * Return: 0 on succcess, 1 on failure
  */
+
 int path_execute(char *command, vars_t *vars)
 {
 	pid_t child_pid;
@@ -47,6 +48,7 @@ int path_execute(char *command, vars_t *vars)
  *
  * Return: pointer to the node that contains the PATH, or NULL on failure
  */
+
 char *find_path(char **env)
 {
 	char *path = "PATH=";
@@ -63,12 +65,14 @@ char *find_path(char **env)
 	return (env[i]);
 
 }
+
 /**
  * check_for_path - checks if the command is in the PATH
  * @vars: variables
  *
  * Return: void
  */
+
 void check_for_path(vars_t *vars)
 {
 	char *path, *path_dup = NULL, *check = NULL;
@@ -112,12 +116,14 @@ void check_for_path(vars_t *vars)
 	if (r == 1)
 		new_exit(vars);
 }
+
 /**
  * execute_cwd - executes the command in the current working directory
  * @vars: pointer to struct of variables
  *
  * Return: 0 on success, 1 on failure
  */
+
 int execute_cwd(vars_t *vars)
 {
 	pid_t child_pid;
@@ -158,12 +164,14 @@ int execute_cwd(vars_t *vars)
 	vars->status = 127;
 	return (0);
 }
+
 /**
  * check_for_dir - checks if the command is a part of a path
  * @str: command
  *
  * Return: 1 on success, 0 on failure
  */
+
 int check_for_dir(char *str)
 {
 	unsigned int i;
