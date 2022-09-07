@@ -25,6 +25,7 @@ void print_error(vars_t *vars, char *msg)
 	else
 		perror("");
 }
+
 /**
  * _puts2 - prints a string to standard error
  * @str: string to print
