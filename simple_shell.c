@@ -9,6 +9,7 @@ unsigned int sig_flag;
  *
  * Return: void
  */
+
 static void sig_handler(int uuv)
 {
 	(void) uuv;
@@ -17,6 +18,7 @@ static void sig_handler(int uuv)
 	else
 		_puts("\n");
 }
+
 /**
  * main - main function for the shell
  * @argc: number of arguments passed to main
@@ -25,6 +27,7 @@ static void sig_handler(int uuv)
  *
  * Return: 0 or exit status, or ?
  */
+
 int main(int argc __attribute__((unused)), char **argv, char **environment)
 {
 	size_t len_buffer = 0;
