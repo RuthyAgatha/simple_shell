@@ -6,7 +6,6 @@
  *
  * Return: pointer to the new environment
  */
-
 char **make_env(char **env)
 {
 	char **newenv = NULL;
@@ -32,7 +31,6 @@ char **make_env(char **env)
  *
  * Return: void
  */
-
 void free_env(char **env)
 {
 	unsigned int i;
