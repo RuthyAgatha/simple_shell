@@ -1,4 +1,5 @@
 #include "shell.h"
+
 /**
  * check_match - checks if a character matches any in a string
  * @c: character to check
@@ -6,6 +7,7 @@
  *
  * Return: 1 if match, 0 if not
  */
+
 unsigned int check_match(char c, const char *str)
 {
 	unsigned int i;
@@ -25,6 +27,7 @@ unsigned int check_match(char c, const char *str)
  *
  * Return: pointer to the next token or NULL
  */
+
 char *new_strtok(char *str, const char *delim)
 {
 	static char *token_start;
