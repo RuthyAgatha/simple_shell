@@ -6,7 +6,6 @@
  *
  * Return: void
  */
-
 void add_key(vars_t *vars)
 {
 	unsigned int i;
@@ -46,7 +45,6 @@ void add_key(vars_t *vars)
  *
  * Return: pointer to address of the environment variable
  */
-
 char **find_key(char **env, char *key)
 {
 	unsigned int i, j, len;
@@ -70,7 +68,6 @@ char **find_key(char **env, char *key)
  *
  * Return: pointer to the new string;
  */
-
 char *add_value(char *key, char *value)
 {
 	unsigned int len1, len2, i, j;
