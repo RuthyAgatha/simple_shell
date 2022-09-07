@@ -7,7 +7,6 @@
  *
  * Return: pointer to the new array
  */
-
 char **_realloc(char **ptr, size_t *size)
 {
 	char **new;
