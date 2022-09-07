@@ -31,7 +31,6 @@ void (*check_for_builtins(vars_t *vars))(vars_t *vars)
  * @vars: variables
  * Return: void
  */
-
 void new_exit(vars_t *vars)
 {
 	int status;
@@ -63,7 +62,6 @@ void new_exit(vars_t *vars)
  * @vars: struct of variables
  * Return: void.
  */
-
 void _env(vars_t *vars)
 {
 	unsigned int i;
@@ -120,7 +118,6 @@ void new_setenv(vars_t *vars)
  *
  * Return: void
  */
-
 void new_unsetenv(vars_t *vars)
 {
 	char **key, **newenv;
